@@ -30,14 +30,9 @@
 
             {% for comment in comments %}
                 <div class="row">
-                    {{ comment }}
+                    {{ comment.content }}
+                    {{ comment.cid }}
                 </div>
-            {% endfor %}
-
-            {% for cid in cids %}
-            <div class="row">
-                {{ cid }}
-            </div>
             {% endfor %}
 
         <div class="row">
