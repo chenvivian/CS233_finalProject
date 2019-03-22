@@ -48,7 +48,12 @@
                         {% else %}
                             at an unknown time
                         {% endif %}
-                        by anonymous
+                        by
+                        {% if comment.commenter %}
+                            {{ comment.commenter.username }}
+                        {% else %}
+                            anonymous
+                        {% endif %}
                     </small>
                 </div>
             {% endfor %}
