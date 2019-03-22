@@ -57,11 +57,12 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
     cid = db.Column(db.Integer, nullable=False)
+    posted = db.Column(db.DateTime, default=datetime.now)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template("main_page.html", comments=Comment.query.all(), timestamp=datetime.now())
+        return render_template("main_page.html", comments=Comment.query.all())
 
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
