@@ -34,6 +34,14 @@
         <div class="container">
 
             <div class="row">
+
+                <select>
+                        <option value =""> </option>
+                    {% for cart in carts %}
+                        <option value = "{{ cart.name }}"> {{ cart.name }} </option>
+                    {% endfor %}
+                </select>
+
             </div>
         </div>
 
