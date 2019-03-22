@@ -19,8 +19,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">My scratchpad: signup page</a>
+                    <a class="navbar-brand" href="#">Sign Up Page</a>
                 </div>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                {% endif %}
+            </ul>
             </div>
         </nav>
 
