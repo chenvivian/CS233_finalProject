@@ -114,3 +114,8 @@ def signup():
     db.session.commit()
 
     return redirect(url_for('login'))
+
+@app.route("/carts/", methods=["GET","POST"])
+def carts():
+
+    return redirect(url_for('carts'))
