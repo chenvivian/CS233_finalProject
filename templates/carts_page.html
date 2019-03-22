@@ -6,7 +6,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-        <title>LOG IN PAGE</title>
+        <title>CARTS PAGE</title>
     </head>
 
     <body>
@@ -19,7 +19,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Log In Page</a>
+                    <a class="navbar-brand" href="#">Carts Page</a>
                 </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -34,25 +34,7 @@
         <div class="container">
 
             <div class="row">
-                {% if error %}
-                    <div class="alert alert-warning" role="alert">
-                        Incorrect username or password
-                    </div>
-                {% endif %}
-
-                <form action="." method="POST">
-                  <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input class="form-control" id="username" name="username" placeholder="Enter your username">
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
-                  </div>
-                  <button type="submit" class="btn btn-success">Log in</button>
-                </form>
             </div>
-
         </div>
 
     </body>
