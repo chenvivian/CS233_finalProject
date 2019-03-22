@@ -96,8 +96,11 @@ def logout():
 @app.route("/signup/", methods=["GET","POST"])
 def signup():
     if request.method == "GET":
-        return render_template("signup_page.html", error=False)
+        return render_template("signup_page.html", userinfo=User.query.all())
 
-    if request.form["username"] != "admin" or request.form["password"] != "secret":
-        return render_template("signup_page.html", error=True)
-    return render_template("signup_page.html")
+    userinfo = User(username=request.form["newuser"], password=request.form["newpass"])
+
+    db.session.add(userinfo)
+    db.session.commit()
+
+    return render_template("login_page.html")
