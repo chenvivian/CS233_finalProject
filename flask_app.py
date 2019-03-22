@@ -117,5 +117,4 @@ def signup():
 
 @app.route("/carts/", methods=["GET","POST"])
 def carts():
-    if request.method == "GET":
-    return redirect(url_for('carts'))
+    return 'Hello'
