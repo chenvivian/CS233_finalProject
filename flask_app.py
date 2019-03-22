@@ -46,13 +46,21 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.filter_by(username=user_id).first()
 
+
+class Carts(db.Model):
+
+    __tablename__ = "carts"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(4096))
+
 class Comment(db.Model):
 
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
-    cid = db.Column(db.Integer, nullable=False)
+    cid = db.Column(db.Integer, db.ForeignKey('carts.id'), nullable=False)
     posted = db.Column(db.DateTime, default=datetime.now)
     commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     commenter = db.relationship('User', foreign_keys=commenter_id)
