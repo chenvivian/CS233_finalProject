@@ -103,4 +103,4 @@ def signup():
     db.session.add(userinfo)
     db.session.commit()
 
-    return redirect(url_for("login_page.html"))
+    return redirect(url_for('login'))
