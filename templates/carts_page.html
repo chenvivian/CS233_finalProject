@@ -32,18 +32,43 @@
         </nav>
 
         <div class="container">
-
             <div class="row">
-
-                <select>
-                        <option value =""> </option>
+                <form onsubmit="return selectCart()">
+                <select id="cartSelect">
+                    <option value =""> </option>
                     {% for cart in carts %}
-                        <option value = "{{ cart.name }}"> {{ cart.name }} </option>
+                        <option value = "{{ cart.id }}"> {{ cart.name }} </option>
                     {% endfor %}
                 </select>
-
+                    <button type="submit" class="btn btn-success">Select Cart</button>
+                </form>
             </div>
         </div>
 
+        <div class ="container">
+            <div class ="row">
+                {% if comments %}
+                <ul>
+                    {% for comment in comments %}
+                        <li> {{ comment.content }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+    <script>
+        var cartSelect = document.getElementById('cartSelect');
+
+        function selectCart(){
+            console.log('/carts/' + cartSelect.value)
+            window.location = '/carts/' + cartSelect.value;
+
+            return false
+        }
+
+    </script>
+
     </body>
 </html>
+

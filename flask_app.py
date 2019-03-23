@@ -118,3 +118,13 @@ def signup():
 @app.route("/carts/")
 def carts():
     return render_template("carts_page.html", carts=Carts.query.all())
+
+@app.route("/carts/<cid>")
+def cartComments(cid):
+    comments = Comment.query.filter_by(cid=cid)
+
+    return render_template("carts_page.html", carts=Carts.query.all(), comments=comments)
+
+
+
+
