@@ -115,7 +115,7 @@ def signup():
 
     return redirect(url_for('login'))
 
-@app.route("/carts/")
+@app.route("/carts/", methods=["GET","POST"])
 def carts():
     return render_template("carts_page.html", carts=Carts.query.all())
 
