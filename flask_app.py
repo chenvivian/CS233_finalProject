@@ -65,8 +65,6 @@ class Comment(db.Model):
     commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     commenter = db.relationship('User', foreign_keys=commenter_id)
 
-
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
@@ -115,16 +113,23 @@ def signup():
 
     return redirect(url_for('login'))
 
-@app.route("/carts/", methods=["GET","POST"])
+@app.route("/carts/")
 def carts():
     return render_template("carts_page.html", carts=Carts.query.all())
 
-@app.route("/carts/<cid>")
+@app.route("/carts/<cid>", methods=["GET","POST"])
+
 def cartComments(cid):
-    comments = Comment.query.filter_by(cid=cid)
+    if request.method == "GET":
+        comments = Comment.query.filter_by(cid=cid)
+        cartName = Carts.query.filter_by(id=cid)
+        return render_template("carts_page.html", carts=Carts.query.all(), comments=comments, cartName=cartName)
 
-    return render_template("carts_page.html", carts=Carts.query.all(), comments=comments)
+    if not current_user.is_authenticated:
+        return redirect(url_for('carts_page'))
 
+    comment = Comment(content=request.form["contents"], cid=cid, commenter=current_user)
+    db.session.add(comment)
+    db.session.commit()
 
-
-
+    return redirect()

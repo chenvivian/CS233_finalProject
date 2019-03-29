@@ -6,7 +6,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-        <title>CARTS PAGE</title>
+        <title>Carts Page</title>
     </head>
 
     <body>
@@ -20,7 +20,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{ url_for('index') }}">Comment Page for Carts</a>
-                    <a class="navbar-brand" href="#">Filter Comments by Cart</a>
+                    <a class="navbar-brand" href="{{ url_for('carts') }}">Filter Comments by Cart</a>
                 </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -33,6 +33,7 @@
             </div>
         </nav>
 
+
         <div class="container">
             <div class="row">
                 <form onsubmit="return selectCart()">
@@ -42,49 +43,61 @@
                         <option value = "{{ cart.id }}"> {{ cart.name }} </option>
                     {% endfor %}
                 </select>
-                    <button type="submit" class="btn btn-success">Select Cart</button>
+                    <button type="submit" name ="selectc" class="btn btn-success" value="Select Cart">Select Cart</button>
                 </form>
             </div>
         </div>
 
         <div class ="container">
             <div class ="row">
+            {% if cartName %}
+                {% for cartN in cartName %}
+                    <h4>Displaying comments for:<br>
+                    {{ cartN.name }}</h4>
+                {% endfor %}
+            {% endif %}</h3>
+            </div>
+        </div>
+
+        <div class ="container">
+            <div class ="row">
+
                 {% if comments %}
                 <ul>
                     {% for comment in comments %}
-                <div class="row">
-                    {{ comment.content }}
-                    {{ comment.cid }}
-                </div>
-                <div>
-                    <small>
-                        Posted
-                        {% if comment.posted %}
-                            {{ comment.posted.strftime("%A, %d %B %Y at %H:%M") }}
-                        {% else %}
-                            at an unknown time
+                    <div class="row">
+                        {{ comment.content }}
+                    </div>
+                    <div>
+                        <small>
+                            Posted
+                            {% if comment.posted %}
+                                {{ comment.posted.strftime("%A, %d %B %Y at %H:%M") }}
+                            {% else %}
+                                at an unknown time
+                            {% endif %}
+                            by
+                            {% if comment.commenter %}
+                                {{ comment.commenter.username }}
+                            {% else %}
+                                anonymous
+                            {% endif %}
+                        </small>
+                    </div>
+                    {% endfor %}
+                    <div>
+                        {% if current_user.is_authenticated %}
+                            <div class="row">
+                                <form method="POST">
+                                    <textarea name="contents" placeholder="Enter a comment"></textarea>
+                                    <input type="submit" name = "postc" class="btn btn-success" value="Post comment">
+                                </form>
+                            </div>
                         {% endif %}
-                        by
-                        {% if comment.commenter %}
-                            {{ comment.commenter.username }}
-                        {% else %}
-                            anonymous
-                        {% endif %}
-                    </small>
-                </div>
-            {% endfor %}
-
+                    </div>
                 </ul>
                 {% endif %}
             </div>
-            {% if current_user.is_authenticated %}
-                <div class="row">
-                    <form action="." method="POST">
-                        <textarea name="contents" placeholder="Enter a comment"></textarea>
-                        <input type="submit" class="btn btn-success" value="Post comment">
-                    </form>
-                </div>
-            {% endif %}
         </div>
 
     <script>
@@ -93,7 +106,6 @@
         function selectCart(){
             console.log('/carts/' + cartSelect.value)
             window.location = '/carts/' + cartSelect.value;
-
             return false
         }
 
