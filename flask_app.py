@@ -124,7 +124,12 @@ def cartComments(cid):
         cartName = Carts.query.filter_by(id=cid)
         return render_template("carts_page.html", carts=Carts.query.all(), comments=comments, cartName=cartName)
 
+    if not current_user.is_authenticated:
+        return redirect(url_for('carts'))
+
     if request.method == "POST":
         comment = Comment(content=request.form["contents"], cid=cid, commenter=current_user)
         db.session.add(comment)
         db.session.commit()
+        return redirect(url_for('carts'))
+
