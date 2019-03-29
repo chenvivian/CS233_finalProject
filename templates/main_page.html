@@ -4,9 +4,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-        <title>MAIN COMMENT PAGE</title>
+        <title>MAIN PAGE</title>
 
     </head>
 
@@ -20,8 +21,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Comment Page for Carts</a>
-              <a class="navbar-brand" href="{{ url_for('carts') }}">Filter Comments by Cart</a>
+              <a class="navbar-brand" href="#">Home</a>
+              <a class="navbar-brand" href="{{ url_for('carts') }}">Carts</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -35,42 +36,23 @@
         </nav>
 
 
-<div class="container">
-
-            {% for comment in comments %}
-                <div class="row">
-                    {{ comment.content }}
-                    {{ comment.cid }}
-                </div>
-                <div>
-                    <small>
-                        Posted
-                        {% if comment.posted %}
-                            {{ comment.posted.strftime("%A, %d %B %Y at %H:%M") }}
-                        {% else %}
-                            at an unknown time
-                        {% endif %}
-                        by
-                        {% if comment.commenter %}
-                            {{ comment.commenter.username }}
-                        {% else %}
-                            anonymous
-                        {% endif %}
-                    </small>
-                </div>
-            {% endfor %}
-
-            {% if current_user.is_authenticated %}
-                <div class="row">
-                    <form action="." method="POST">
-                        <input type = "number" name="cid" placeholder="Enter a cart"></input>
-                        <textarea name="contents" placeholder="Enter a comment"></textarea>
-                        <input type="submit" class="btn btn-success" value="Post comment">
-                    </form>
-                </div>
-            {% endif %}
-
-</div><!-- /.container -->
+    <div class="container">
+        <table class = "general">
+    		<tr>
+    			<td><strong>Carts Map</strong></td>
+    		</tr>
+    		<tr>
+    			<td width = "50%">
+    				<p>
+    					<iframe width="100%" height="600" frameborder="0" src="https://vivian206.carto.com/builder/23639ba7-4d96-4fe2-b39a-c13267037c6d/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+    				</p>
+    			</td>
+    			<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla fringilla felis non convallis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam sed augue nec nunc auctor dictum at vel nibh. Nulla tellus arcu, vulputate in purus in, posuere finibus arcu. Pellentesque non bibendum nisi. Praesent erat ex, ullamcorper id placerat quis, eleifend ac odio. Phasellus dignissim libero nec pharetra imperdiet. Phasellus id nulla odio. Phasellus et eros posuere augue imperdiet pellentesque eu vel diam. Quisque euismod, justo at aliquet vulputate, velit metus pulvinar metus, sed venenatis ligula turpis id tortor. Ut pulvinar tellus non tincidunt interdum. Maecenas at odio mattis, placerat urna in, sagittis eros. Sed egestas, felis eget dapibus sagittis, libero purus porttitor nisl, non pretium orci neque sed nunc. Fusce ac erat ultrices, hendrerit nibh at, porttitor metus. Nullam eu elit viverra, feugiat mi nec, congue orci. Duis non imperdiet metus.
+Fusce finibus diam a nibh interdum, in placerat orci blandit. Vestibulum at felis cursus, varius purus sit amet, feugiat metus. Ut ut metus lectus. Nullam et ipsum ut mi finibus hendrerit a a dolor. Maecenas euismod venenatis tellus. Sed cursus tellus sed odio tristique vulputate. Nunc tempus est et dolor efficitur, a malesuada leo aliquam.
+<br><br></td>
+    		</tr>
+	    </table>
+    </div>
 
     </body>
 </html>

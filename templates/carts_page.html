@@ -4,9 +4,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-        <title>Carts Page</title>
+        <title>Carts</title>
     </head>
 
     <body>
@@ -19,8 +20,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url_for('index') }}">Comment Page for Carts</a>
-                    <a class="navbar-brand" href="{{ url_for('carts') }}">Filter Comments by Cart</a>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+                    <a class="navbar-brand" href="{{ url_for('carts') }}">Carts</a>
                 </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
@@ -33,6 +34,20 @@
             </div>
         </nav>
 
+        <div class="container">
+            <table class = "general">
+        		<tr>
+        			<td><strong>Carts Map</strong></td>
+        		</tr>
+        		<tr>
+        			<td width = "100%">
+        				<p>
+        					<iframe width="1000" height="300" frameborder="0" src="https://vivian206.carto.com/builder/23639ba7-4d96-4fe2-b39a-c13267037c6d/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+        				</p>
+        			</td>
+                </tr>
+    	    </table>
+        </div>
 
         <div class="container">
             <div class="row">
