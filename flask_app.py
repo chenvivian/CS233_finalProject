@@ -132,4 +132,3 @@ def cartComments(cid):
         db.session.add(comment)
         db.session.commit()
         return redirect(url_for('carts'))
-
