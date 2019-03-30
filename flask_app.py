@@ -131,4 +131,4 @@ def cartComments(cid):
         comment = Comment(content=request.form["contents"], cid=cid, commenter=current_user)
         db.session.add(comment)
         db.session.commit()
-        return redirect(url_for('carts'))
+        return redirect(url_for('cartComments', cid=cid))
