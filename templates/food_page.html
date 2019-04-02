@@ -30,7 +30,8 @@
             <div class ="row">
             {% if cartsPrices %}
                 {% for cartsPrice in cartsPrices %}
-                    <h4>Displaying Carts and Prices for: {{ cartsPrice.fname }}<br></h4>
+                    <h4>Displaying Carts and Prices for:
+                    {{ cartsPrice.fname }}<br></h4>
                     Cart ID: {{ cartsPrice.cid }} Price: {{ cartsPrice.price }}
                 {% endfor %}
             {% endif %}

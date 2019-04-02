@@ -156,11 +156,11 @@ def foodList(fname):
 
 @app.route("/menu")
 def menu():
-    return render_template("menu_page.html", menu=Carts.query.all())
+    return render_template("menu_page.html", carts=Carts.query.all())
 
 @app.route("/menu/<cid>", methods=["GET","POST"])
 def cartMenu(cid):
     if request.method == "GET":
         cartName = Carts.query.filter_by(id=cid)
         foods = Food.query.filter_by(cid=cid)
-        return render_template("carts_page.html", carts=Carts.query.all(), cartName=cartName, foods=foods)
+        return render_template("menu_page.html", carts=Carts.query.all(), cartName=cartName, foods=foods)
