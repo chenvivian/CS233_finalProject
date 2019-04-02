@@ -142,3 +142,14 @@ def cartComments(cid):
         db.session.add(comment)
         db.session.commit()
         return redirect(url_for('cartComments', cid=cid))
+
+@app.route("/food")
+def food():
+    return render_template("food_page.html", food=Food.query.all())
+
+@app.route("/food/<fname>", methods=["GET","POST"])
+def foodList(fname, cid):
+    if request.method == "GET":
+        foods = Food.query.filter_by(fname=fname)
+        return render_template("food_page.html", foods=foods)
+
