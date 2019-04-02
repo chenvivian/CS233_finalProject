@@ -36,17 +36,18 @@
 
         <div class="container">
             <table class = "general">
-        		<tr>
-        			<td><strong>Carts Map</strong></td>
-        		</tr>
-        		<tr>
-        			<td width = "100%">
-        				<p>
-        					<iframe width="1000" height="300" frameborder="0" src="https://vivian206.carto.com/builder/23639ba7-4d96-4fe2-b39a-c13267037c6d/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-        				</p>
-        			</td>
-                </tr>
-    	    </table>
+    		<tr>
+    			<td><strong>Carts Map<br><br></strong></td>
+    		</tr>
+    		<tr>
+    			<td width = "100%">
+    				<p>
+    					<iframe width="100%" height="300" frameborder="0" src="https://vivian206.carto.com/builder/23639ba7-4d96-4fe2-b39a-c13267037c6d/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+    				</p>
+    			</td>
+    			<td>.</td>
+    		</tr>
+	    </table>
         </div>
 
         <div class="container">
@@ -104,7 +105,7 @@
                         {% if current_user.is_authenticated %}
                             <div class="row">
                                 <form method="POST">
-                                    <textarea name="contents" placeholder="Enter a comment"></textarea>
+                                    <textarea class = "comments" name="contents" placeholder="Enter a comment"></textarea>
                                     <input type="submit" name = "postc" class="btn btn-success" value="Post comment">
                                 </form>
                             </div>

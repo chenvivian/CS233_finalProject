@@ -65,6 +65,16 @@ class Comment(db.Model):
     commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     commenter = db.relationship('User', foreign_keys=commenter_id)
 
+class Food(db.Model):
+
+    __tablename__ = "foods"
+
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(4096))
+    cid = db.Column(db.Integer, db.ForeignKey('carts.id'), nullable=False)
+    price = db.Column(db.Float, nullable = False)
+    posted = db.Column(db.DateTime, default=datetime.now)
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
