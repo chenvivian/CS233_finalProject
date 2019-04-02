@@ -7,43 +7,45 @@
         <link rel = "stylesheet" type = "text/css" href = "css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-        <title>Food</title>
     </head>
 
     <body>
 
         <div class="container">
             <div class="row">
-                <form onsubmit="return selectFood()">
-                <select id="foodSelect">
+                <form onsubmit="return selectCart()">
+                <select id="cartSelect">
                     <option value =""> </option>
-                    {% for food in foods %}
-                        <option value = "{{ food.fname }}"> {{ food.fname }} </option>
+                    {% for cart in carts %}
+                        <option value = "{{ cart.id }}"> {{ cart.name }} </option>
                     {% endfor %}
                 </select>
-                    <button type="submit" name ="selectf" class="btn btn-success" value="Select Food">Select Food</button>
+                    <button type="submit" name ="selectc" class="btn btn-success" value="Select Cart">Select Cart</button>
                 </form>
             </div>
         </div>
 
         <div class ="container">
             <div class ="row">
-            {% if cartsPrices %}
-                {% for cartsPrice in cartsPrices %}
-                    <h4>Displaying Carts and Prices for: {{ cartsPrice.fname }}<br></h4>
-                    Cart ID: {{ cartsPrice.cid }} Price: {{ cartsPrice.price }}
-                {% endfor %}
-            {% endif %}
+                {% if foods %}
+                Menu:
+                    <ul>
+                        {% for food in foods %}
+                        <div class ="row">
+                            {{ food.fname }}     ${{ food.price }}
+                        </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </div>
 
-
     <script>
-        var foodSelect = document.getElementById('foodSelect');
+        var cartSelect = document.getElementById('cartSelect');
 
-        function selectFood(){
-            console.log('/food/' + foodSelect.value)
-            window.location = '/food/' + foodSelect.value;
+        function selectCart(){
+            console.log('/menu/' + cartSelect.value)
+            window.location = '/menu/' + cartSelect.value;
             return false
         }
 
