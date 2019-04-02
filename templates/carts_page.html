@@ -66,6 +66,21 @@
 
         <div class ="container">
             <div class ="row">
+                {% if foods %}
+                Menu:
+                    <ul>
+                        {% for food in foods %}
+                        <div class ="row">
+                            {{ food.fname }}     ${{ food.price }}
+                        </div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class ="container">
+            <div class ="row">
             {% if cartName %}
                 {% for cartN in cartName %}
                     <h4>Displaying comments for:<br>

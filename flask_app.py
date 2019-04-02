@@ -132,7 +132,8 @@ def cartComments(cid):
     if request.method == "GET":
         comments = Comment.query.filter_by(cid=cid)
         cartName = Carts.query.filter_by(id=cid)
-        return render_template("carts_page.html", carts=Carts.query.all(), comments=comments, cartName=cartName)
+        foods = Food.query.filter_by(cid=cid)
+        return render_template("carts_page.html", carts=Carts.query.all(), comments=comments, cartName=cartName, foods=foods)
 
     if not current_user.is_authenticated:
         return redirect(url_for('carts'))
@@ -145,11 +146,11 @@ def cartComments(cid):
 
 @app.route("/food")
 def food():
-    return render_template("food_page.html", food=Food.query.all())
+    return render_template("food_page.html", foods=Food.query.all())
 
-@app.route("/food/<fname>", methods=["GET","POST"])
-def foodList(fname, cid):
+@app.route("/food/<fname>", methods=["GET"])
+def foodList(fname):
     if request.method == "GET":
-        foods = Food.query.filter_by(fname=fname)
-        return render_template("food_page.html", foods=foods)
+        cartsPrices = Food.query.filter_by(fname=fname)
+        return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices)
 

@@ -40,7 +40,7 @@
                 <select id="foodSelect">
                     <option value =""> </option>
                     {% for food in foods %}
-                        <option value = "{{ foods.fname }}"> {{ foods.fname }} </option>
+                        <option value = "{{ food.fname }}"> {{ food.fname }} </option>
                     {% endfor %}
                 </select>
                     <button type="submit" name ="selectf" class="btn btn-success" value="Select Food">Select Food</button>
@@ -50,16 +50,15 @@
 
         <div class ="container">
             <div class ="row">
-            {% if fnames %}
-                {% for fname in fnames %}
-                    <h4>Displaying food for:<br>
-                    {{ fname.fname }}<br>
-                    {{ fname.cid }}<br>
-                    {{ fname.price }}</h4>
+            {% if cartsPrices %}
+                {% for cartsPrice in cartsPrices %}
+                    <h4>Displaying Carts and Prices for: {{ cartsPrice.fname }}<br></h4>
+                    Cart ID: {{ cartsPrice.cid }} Price: {{ cartsPrice.price }}
                 {% endfor %}
             {% endif %}
             </div>
         </div>
+
 
     <script>
         var foodSelect = document.getElementById('foodSelect');
