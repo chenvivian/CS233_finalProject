@@ -164,3 +164,7 @@ def cartMenu(cid):
         cartName = Carts.query.filter_by(id=cid)
         foods = Food.query.filter_by(cid=cid)
         return render_template("menu_page.html", carts=Carts.query.all(), cartName=cartName, foods=foods)
+
+@app.route("/map")
+def map():
+    return render_template("maptest_page.html")
