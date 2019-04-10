@@ -11,43 +11,6 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
-                    <a class="navbar-brand" href="{{ url_for('carts') }}">Carts</a>
-                </div>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-                    <li><a href="{{ url_for('login') }}">Log in</a></li>
-                {% endif %}
-            </ul>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="row">
-                <form onsubmit="return selectNewFood()">
-                <select id="newFoodSelect">
-                    <option value =""> </option>
-                    {% for food in foods %}
-                        <option value = "{{ food.fname }}"> {{ food.fname }} </option>
-                    {% endfor %}
-                </select>
-                    <button type="submit" name ="selectc" class="btn btn-success" value="Select Cart">Add New Food</button>
-                </form>
-            </div>
-        </div>
-
 
         <div class ="container">
             <div class ="row">
@@ -55,6 +18,16 @@
                     {% if current_user.is_authenticated %}
                         <form method="POST">
                             <div class="row">
+                                Please select a cart:
+                                <select>
+                                    <option value = ""></option>
+                                    {% for cart in carts %}
+                                        <option value = "{{ cart.cid }}"> {{ cart.name }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="row">
+                                Please select a new food item:
                                 <select>
                                     <option value = ""></option>
                                     {% for food in foods %}
@@ -63,8 +36,11 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <textarea class = "comments" name="contents" placeholder="Enter a comment"></textarea>
-                                <input type="submit" name = "postc" class="btn btn-success" value="Post comment">
+                                If food item is not listed in dropdown box, please input in the text box below:<br><br>
+                                <textarea class = "newFood" name="contents" placeholder="Enter a new food option"></textarea><br><br>
+                                Please enter a price for the new food item:<br><br>
+                                <textarea class = "newPrice" name="contents" placeholder="Enter a price value"></textarea><br><br>
+                                <input type="submit" name = "postc" class="btn btn-success" value="Submit new food option for this cart">
                             </div>
                         </form>
                     {% endif %}

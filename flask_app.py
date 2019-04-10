@@ -171,5 +171,5 @@ def map():
 
 @app.route("/addfood")
 def addFood():
-    return render_template("addfood_page.html", foods=Food.query.all())
+    return render_template("addfood_page.html", carts=Carts.query.all(), foods=Food.query.all())
 
