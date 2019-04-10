@@ -29,8 +29,8 @@
         <div class ="container">
             <div class ="row">
             {% if cartsPrices %}
+                <h4>Displaying Carts and Prices for:
                 {% for cartsPrice in cartsPrices %}
-                    <h4>Displaying Carts and Prices for:
                     {{ cartsPrice.fname }}<br></h4>
                     Cart ID: {{ cartsPrice.cid }} Price: {{ cartsPrice.price }}
                 {% endfor %}

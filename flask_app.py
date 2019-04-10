@@ -168,3 +168,8 @@ def cartMenu(cid):
 @app.route("/map")
 def map():
     return render_template("maptest_page.html")
+
+@app.route("/addfood")
+def addFood():
+    return render_template("addfood_page.html", foods=Food.query.all())
+
