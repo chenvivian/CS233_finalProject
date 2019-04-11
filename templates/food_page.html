@@ -48,6 +48,14 @@
             return false
         }
 
+
+        function() {
+            var select = $('select');
+            select.html(select.find('option').sort(function(x, y) {
+            return $(x).text() > $(y).text() ? 1 : -1;
+          }));
+        };
+
     </script>
 
     </body>

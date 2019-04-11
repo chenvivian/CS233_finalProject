@@ -154,6 +154,17 @@ def foodList(fname):
         cartsPrices = Food.query.filter_by(fname=fname)
         return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices)
 
+
+
+#    @app.route("/price", methods=["GET"])
+#    def foodList(fname):
+#        if request.method == "GET":
+#            cartsPrices = Food.query.filter_by(fname=fname)
+#            return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices)
+
+
+
+
 @app.route("/menu")
 def menu():
     return render_template("menu_page.html", carts=Carts.query.all())
@@ -171,5 +182,14 @@ def map():
 
 @app.route("/addfood")
 def addFood():
-    return render_template("addfood_page.html", carts=Carts.query.all(), foods=Food.query.all())
+    if request.method == "GET":
+        return render_template("addfood_page.html", carts=Carts.query.all(), foods=Food.query.all())
 
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    if request.method == "POST":
+        food = Food(content=request.form["newFood"], cid=cid, fname=fname, price=price)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('cartComments', cid=cid))

@@ -19,7 +19,7 @@
                         <form method="POST">
                             <div class="row">
                                 Please select a cart:
-                                <select>
+                                <select id ="cid">
                                     <option value = ""></option>
                                     {% for cart in carts %}
                                         <option value = "{{ cart.cid }}"> {{ cart.name }} </option>
@@ -28,18 +28,18 @@
                             </div>
                             <div class="row">
                                 Please select a new food item:
-                                <select>
+                                <select id = "fname" onchange='checkvalue(this.value)'>
                                     <option value = ""></option>
                                     {% for food in foods %}
                                         <option value = "{{ food.fname }}"> {{ food.fname }} </option>
                                     {% endfor %}
+                                    <textarea class = "fname" id="selectFood" placeholder="Enter a new food option if not listed" ></textarea>
                                 </select>
                             </div>
                             <div class="row">
-                                If food item is not listed in dropdown box, please input in the text box below:<br><br>
-                                <textarea class = "newFood" name="contents" placeholder="Enter a new food option"></textarea><br><br>
+                                If food item is not listed in dropdown box, please input in the text box below:<br>
                                 Please enter a price for the new food item:<br><br>
-                                <textarea class = "newPrice" name="contents" placeholder="Enter a price value"></textarea><br><br>
+                                <textarea class = "price" name="price" placeholder="Enter a price value"></textarea><br><br>
                                 <input type="submit" name = "postc" class="btn btn-success" value="Submit new food option for this cart">
                             </div>
                         </form>
@@ -48,6 +48,16 @@
             </div>
         </div>
 
+
+    <script>
+        function checkvalue(val)
+            {
+                if(val==="")
+                    document.getElementById('selectFood').value = "";
+                else
+                    document.getElementById('selectFood').value = document.getElementById('fname').value;
+            }
+    </script>
     </body>
 </html>
 
