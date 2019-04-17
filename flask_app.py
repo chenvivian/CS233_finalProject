@@ -183,3 +183,8 @@ def addFood():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
 
+    if request.method == "POST":
+        food = Food(cid=request.form["cid"], fname=request.form["fname"], price=request.form["price"])
+        db.session.add(food)
+        db.session.commit()
+        return redirect(url_for('addfood'))

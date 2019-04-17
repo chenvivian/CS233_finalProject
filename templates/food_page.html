@@ -32,7 +32,7 @@
                 <h4>Displaying Carts and Prices for:
                 {% for cartsPrice in cartsPrices %}
                     {{ cartsPrice.fname }}<br></h4>
-                    Cart ID: {{ cartsPrice.cid }} Price: {{ cartsPrice.price }}
+                    Cart ID: {{ cartsPrice.cid }} Price: ${{ cartsPrice.price }}
                 {% endfor %}
             {% endif %}
             </div>
