@@ -1,45 +1,86 @@
-<html>
-    <head>
+<head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
         <title>Add Food</title>
     </head>
 
     <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+                    <a class="navbar-brand" href="{{ url_for('carts') }}">Carts</a>
+                </div>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('login') }}">Log in</a></li>
+                {% endif %}
+            </ul>
+            </div>
+        </nav>
 
         <div class ="container">
             <div class ="row">
-                <div>
+                {% if cartName %}
+                    {% for cartN in cartName %}
+                        <h2>Adding Food Item for: {{ cartN.name }}</h2>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
 
+        <div class ="container">
+            <div class ="row">
+                <h4>Current Menu</h4>
+                {% if menu %}
+                    <table>
+                        {% for food in menu %}
+                        <tr>
+                            <td>{{ food.fname }}</td>
+                            <td>${{ food.price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+<br><br>
+        <div class ="container">
+            <div class ="row">
+                <div>
                         <form method="POST">
-                            <div class="row">
-                                Please select a cart:
-                                <select id ="cid">
-                                    <option value = ""></option>
-                                    {% for cart in carts %}
-                                        <option value = "{{ cart.cid }}"> {{ cart.name }} </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="row">
-                                Please add or select a new food item:
-                                <textarea class = "fname" id="selectFood" placeholder="Enter a new food option if not listed" ></textarea><br>
-                                <select id = "fname" onchange='checkvalue(this.value)'>
+
+                                Please add or select a new food item below <em>(if item not listed, choose the blank option and type in the text box)</em>:<br>
+                                <select id = "selectFoodText" onchange='checkvalue(this.value)'>
                                     <option value = ""></option>
                                     {% for food in foods %}
                                         <option value = "{{ food.fname }}"> {{ food.fname }} </option>
                                     {% endfor %}
-                                </select>
-                            </div>
-                            <div class="row">
+                                </select><br>
+                                <textarea class = "fname" name = "selectFood" id="selectFood" placeholder="Enter a new food option if not listed" ></textarea><br>
+                            <br><br>
+
                                 Please enter a price for the new food item (don't include $ sign):<br><br>
-                                <textarea class = "price" name="price" placeholder="Enter a price value"></textarea><br><br>
-                                <input type="submit" class="btn btn-success" value="Submit new food option for this cart">
-                            </div>
+                                <textarea class = "price" name="price" placeholder="Enter a price value"></textarea>
+
+                            <br><br>
+
+                            <input type="submit" class="btn btn-success" value="Submit new food option for this cart">
+
                         </form>
 
                 </div>
@@ -53,7 +94,7 @@
                 if(val==="")
                     document.getElementById('selectFood').value = "";
                 else
-                    document.getElementById('selectFood').value = document.getElementById('fname').value;
+                    document.getElementById('selectFood').value = document.getElementById('selectFoodText').value;
             }
     </script>
     </body>

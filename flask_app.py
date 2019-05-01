@@ -144,6 +144,17 @@ def cartComments(cid):
         db.session.commit()
         return redirect(url_for('cartComments', cid=cid))
 
+@app.route("/addCart", methods=["GET","POST"])
+def addCart():
+    if request.method == "GET":
+        return render_template("addCart_page.html")
+
+    if request.method == "POST":
+        cart = Carts(name=request.form["name"])
+        db.session.add(cart)
+        db.session.commit()
+        return redirect(url_for('carts'))
+
 @app.route("/food")
 def food():
     return render_template("food_page.html", foods=Food.query.all())
@@ -175,16 +186,18 @@ def cartMenu(cid):
 def map():
     return render_template("maptest_page.html")
 
-@app.route("/addfood")
-def addFood():
+@app.route("/addfood/<cid>", methods=["GET","POST"])
+def addFood(cid):
     if request.method == "GET":
-        return render_template("addfood_page.html", carts=Carts.query.all(), foods=Food.query.all())
+        cartName = Carts.query.filter_by(id=cid)
+        menu = Food.query.filter_by(cid=cid)
+        return render_template("addfood_page.html", foods=Food.query.all(), cartName=cartName, menu=menu)
 
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
 
     if request.method == "POST":
-        food = Food(cid=request.form["cid"], fname=request.form["fname"], price=request.form["price"])
+        food = Food(cid=cid, fname=request.form["selectFood"], price=request.form["price"])
         db.session.add(food)
         db.session.commit()
-        return redirect(url_for('addfood'))
+        return redirect(url_for('cartComments', cid=cid))

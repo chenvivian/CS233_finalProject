@@ -37,7 +37,7 @@
         <div class="container">
             <table class = "general">
     		<tr>
-    			<td><strong>Carts Map<br><br></strong></td>
+    			<td><h2>Carts Map</h2><br></td>
     		</tr>
     		<tr>
     			<td width = "100%">
@@ -61,32 +61,38 @@
                 </select>
                     <button type="submit" name ="selectc" class="btn btn-success" value="Select Cart">Select Cart</button>
                 </form>
+                <em>Don't see a cart listed? Add here:</em>
+
             </div>
         </div>
 
         <div class ="container">
             <div class ="row">
-                {% if foods %}
-                Menu:
-                    <ul>
-                        {% for food in foods %}
-                        <div class ="row">
-                            {{ food.fname }}     ${{ food.price }}
-                        </div>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </div>
 
-        <div class ="container">
-            <div class ="row">
             {% if cartName %}
                 {% for cartN in cartName %}
-                    <h4>Displaying comments for:<br>
-                    {{ cartN.name }}</h4>
+                    <h2>{{ cartN.name }}</h2>
+                    <p hidden id ="test">{{ cartN.id }}</p>
                 {% endfor %}
+
             {% endif %}
+
+                {% if foods %}
+                <h4>Menu:</h4>
+                    <table>
+                        {% for food in foods %}
+                        <tr>
+                            <td>{{ food.fname }}</td>
+                            <td>${{ food.price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                <br>
+                <em>Don't see a food item listed? Add here:</em>
+                <form onsubmit="return addFood()">
+                    <button type="submit" class="btn btn-success" value="Add Food">Add Food</button>
+                </form>
+                {% endif %}
             </div>
         </div>
 
@@ -94,6 +100,7 @@
             <div class ="row">
 
                 {% if comments %}
+                <h4>Comments</h4>
                 <ul>
                     {% for comment in comments %}
                     <div class="row">
@@ -131,13 +138,20 @@
             </div>
         </div>
 
-
     <script>
         var cartSelect = document.getElementById('cartSelect');
 
         function selectCart(){
             console.log('/carts/' + cartSelect.value)
             window.location = '/carts/' + cartSelect.value;
+            return false
+        }
+
+        var selectID = document.getElementById('test').textContent;
+
+        function addFood(){
+            console.log('/addfood/' + selectID)
+            window.location = '/addfood/' + selectID;
             return false
         }
 
