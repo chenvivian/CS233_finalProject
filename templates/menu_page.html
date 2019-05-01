@@ -39,13 +39,14 @@
         <div class ="container">
             <div class ="row">
                 {% if foods %}
-                    <ul>
+                    <table>
                         {% for food in foods %}
-                        <div class ="row">
-                            {{ food.fname }}     ${{ food.price }}
-                        </div>
+                        <tr>
+                            <td><p>{{ food.fname }}</p></td>
+                            <td><p>${{ food.price }}</p></td>
+                        </tr>
                         {% endfor %}
-                    </ul>
+                    </table>
                 {% endif %}
             </div>
         </div>

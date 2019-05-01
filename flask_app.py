@@ -163,7 +163,7 @@ def food():
 def foodList(fname):
     if request.method == "GET":
         cartsPrices = Food.query.filter_by(fname=fname)
-        return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices)
+        return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices, fname=fname)
 
 #    @app.route("/price", methods=["GET"])
 #    def foodList(fname):

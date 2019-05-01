@@ -29,11 +29,19 @@
         <div class ="container">
             <div class ="row">
             {% if cartsPrices %}
-                <h4>Displaying Carts and Prices for:
-                {% for cartsPrice in cartsPrices %}
-                    {{ cartsPrice.fname }}<br></h4>
-                    Cart ID: {{ cartsPrice.cid }} Price: ${{ cartsPrice.price }}
-                {% endfor %}
+                <h4>Displaying Carts and Prices for {{ fname }}:</h4>
+                <table>
+                    <tr>
+                        <td>Cart Name:</td>
+                        <td>Price:</td>
+                    </tr>
+                    {% for cartsPrice in cartsPrices %}
+                    <tr>
+                        <td>{{ cartsPrice.cid }}</td>
+                        <td>${{ cartsPrice.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             {% endif %}
             </div>
         </div>
