@@ -42,8 +42,8 @@
     		<tr>
     			<td width = "100%">
     				<p>
-    					<iframe width="100%" height="300" frameborder="0" src="https://vivian206.carto.com/builder/23639ba7-4d96-4fe2-b39a-c13267037c6d/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-    				</p>
+    					<iframe width="100%" height="300" frameborder="0" src="https://www.google.com/maps/d/embed?mid=1ZLjvtxv_oe3pAn7v0Gt8aFYdR-fwASDT&hl=en" ></iframe>
+                    </p>
     			</td>
     			<td>.</td>
     		</tr>
@@ -61,8 +61,9 @@
                 </select>
                     <button type="submit" name ="selectc" class="btn btn-success" value="Select Cart">Select Cart</button>
                 </form>
+                {% if current_user.is_authenticated %}
                 <em>Don't see a cart listed? Add here: <a href ="{{ url_for('addCart') }}">Add Cart</a></em>
-
+                {% endif %}
             </div>
         </div>
 
@@ -78,20 +79,22 @@
             {% endif %}
 
                 {% if foods %}
-                <h4>Menu:</h4>
-                    <table>
-                        {% for food in foods %}
-                        <tr>
-                            <td>{{ food.fname }}</td>
-                            <td>${{ food.price }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                <br>
-                <em>Don't see a food item listed? Add here:</em>
-                <form onsubmit="return addFood()">
-                    <button type="submit" class="btn btn-success" value="Add Food">Add Food</button>
-                </form>
+                    <h4>Menu:</h4>
+                        <table>
+                            {% for food in foods %}
+                            <tr>
+                                <td>{{ food.fname }}</td>
+                                <td>&emsp;${{ food.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <br>
+                    {% if current_user.is_authenticated %}
+                        <em>Don't see a food item listed? Add here:</em>
+                        <form onsubmit="return addFood()">
+                            <button type="submit" class="btn btn-success" value="Add Food">Add Food</button>
+                        </form>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

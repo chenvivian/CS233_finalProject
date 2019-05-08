@@ -37,28 +37,34 @@
 
 
     <div class="container">
-        <strong>Carts Map</strong>
+        <h3><strong>Carts Map</strong></h3>
         <table class = "general">
     		<tr>
     		    <td colspan = "2">
-    		        Welcome to this website. We have compiled a list of carts around Hunter College and their menus.
+    		        Welcome Hunter's first crowdsourced food cart website! Here, you can find a list of food carts and their menus around Hunter College.
     		        Please use the search features to explore the food prices and feel free to comment on each cart.
-    		        To add a comment, new cart, or new food item, go on the "Carts" page (user must be logged in to post).
+    		        To add a comment, new cart, or new food item, go on the "Carts" page (user must be logged in to post). <br>
     		    </td>
     		</tr>
+
     		<tr>
-    			<td width = "50%" rowspan = "2">
-    				<p>
-    					<iframe width="100%" height="600" frameborder="0" src="https://vivian206.carto.com/builder/23639ba7-4d96-4fe2-b39a-c13267037c6d/embed" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-    				</p>
+    			<td width = "50%" rowspan = "3">
+    				<p><br>
+    					<iframe width="100%" height="723" frameborder="0" src="https://www.google.com/maps/d/embed?mid=1ZLjvtxv_oe3pAn7v0Gt8aFYdR-fwASDT&hl=en" > </iframe>
+                    </p><br><br><br>
     			</td>
-    			<td>
-    			    <iframe src="{{ url_for('menu') }}" height="300" width="100%" style="border:none;" scrolling="no"></iframe>
+    			<td><br>
+    			    <iframe src="{{ url_for('menu') }}" height="241" width="100%" style="border:none;" scrolling="yes"></iframe>
                 </td>
     		</tr>
     		<tr>
     		    <td>
-    		        <iframe src="{{ url_for('food') }}" height="300" width="100%" style="border:none;" scrolling="no"></iframe>
+    		        <iframe src="{{ url_for('food') }}" height="241" width="100%" style="border:none;" scrolling="yes"></iframe>
+    		    </td>
+    		</tr>
+    		<tr>
+    		    <td>
+    		        <iframe src="{{ url_for('price') }}" height="241" width="100%" style="border:none;" scrolling="yes"></iframe>
     		    </td>
     		</tr>
 	    </table>

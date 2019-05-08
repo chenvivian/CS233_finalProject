@@ -7,47 +7,40 @@
         <link rel = "stylesheet" type = "text/css" href = "css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
+        <title>Food</title>
     </head>
 
     <body>
 
         <div class="container">
             <div class="row">
-                <form onsubmit="return selectCart()">
-                <select id="cartSelect">
-                    <option value =""> </option>
-                    {% for cart in carts %}
-                        <option value = "{{ cart.id }}"> {{ cart.name }} </option>
-                    {% endfor %}
+                <form onsubmit="return selectPrice()">
+                <select id="priceSelect">
+                    <option value =""></option>
+                    <option value ="2">$2.00 </option>
+                    <option value ="5">$5.00 </option>
+                    <option value ="10">$10.00 </option>
                 </select>
-                    <button type="submit" name ="selectc" class="btn btn-success" value="Select Cart">Select Cart</button>
+                    <button type="submit" name ="selectp" class="btn btn-success" value="Select Budget">Select Budget</button>
                 </form>
             </div>
         </div>
 
         <div class ="container">
             <div class ="row">
-            {% if cartName %}
-                {% for cartN in cartName %}
-                    <h4>Displaying Menu for:<br>
-                    {{ cartN.name }}</h4>
-                {% endfor %}
-            {% endif %}
-            </div>
-        </div>
-
-        <div class ="container">
-            <div class ="row">
-                {% if foods %}
+                {% if cartsPrices1 %}
+                    <h4> Displaying Foods for budget:{{ price }} </h4>
                     <table>
                         <tr>
                             <td><p>Food Name</p></td>
                             <td><p> &emsp; Food Price</p></td>
+                            <td><p> &emsp;&emsp; Cart</p></td>
                         </tr>
-                        {% for food in foods %}
+                        {% for foodsInCart in cartsPrices1 %}
                         <tr>
-                            <td><p>{{ food.fname }}</p></td>
-                            <td><p> &emsp; ${{ food.price }}</p></td>
+                            <td><p>{{ foodsInCart.fname }}</p></td>
+                            <td><p>&emsp;&emsp;${{ foodsInCart.price }}</p></td>
+                            <td><p>&emsp;&emsp;&emsp;{{ foodsInCart.cid }}</p></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -55,12 +48,13 @@
             </div>
         </div>
 
-    <script>
-        var cartSelect = document.getElementById('cartSelect');
 
-        function selectCart(){
-            console.log('/menu/' + cartSelect.value)
-            window.location = '/menu/' + cartSelect.value;
+    <script>
+        var priceSelect = document.getElementById('priceSelect');
+
+        function selectPrice(){
+            console.log('/price/' + priceSelect.value)
+            window.location = '/price/' + priceSelect.value;
             return false
         }
 

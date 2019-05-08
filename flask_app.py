@@ -162,14 +162,24 @@ def food():
 @app.route("/food/<fname>", methods=["GET"])
 def foodList(fname):
     if request.method == "GET":
-        cartsPrices = Food.query.filter_by(fname=fname)
+        cartsPrices = Food.query.join(Carts, (Food.cid == Carts.id)).filter(Food.fname == fname)
         return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices, fname=fname)
 
-#    @app.route("/price", methods=["GET"])
-#    def foodList(fname):
-#        if request.method == "GET":
-#            cartsPrices = Food.query.filter_by(fname=fname)
-#            return render_template("food_page.html", foods=Food.query.all(), cartsPrices=cartsPrices)
+
+@app.route("/price", methods=["GET"])
+def price():
+    if request.method == "GET":
+
+        return render_template("price_page.html")
+
+@app.route("/price/<price>", methods=["GET"])
+def priceList(price):
+    if request.method == "GET":
+        cartsPrices1 = Food.query.filter(Food.price < price)
+        cartsPrices2 = Food.query.filter(Food.price < price)
+        cartsPrices3 = Food.query.filter(Food.price < price)
+        return render_template("price_page.html", foods=Food.query.all(), cartsPrices1=cartsPrices1, cartsPrices2=cartsPrices2, cartsPrices3=cartsPrices3)
+
 
 @app.route("/menu")
 def menu():
